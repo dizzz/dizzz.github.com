@@ -118,6 +118,121 @@ body{ -webkit-animation: bugfix infinite 1s; }
           <div class="icon"></div>
             
     
+      <h1 class="title transition"><a href="/2016/09/28/spfa/">spfa</a></h1>
+    
+  
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2016-09-28T14:28:18.000Z">2016-09-28</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">Dizzz</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+          </ul>
+        </header>
+      
+      <div class="entry">
+        
+          
+            <h1 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h1><blockquote>
+<p>求单源最短路的SPFA算法的全称是：Shortest Path Faster Algorithm。 SPFA算法是西南交通大学段凡丁于1994年发表的。[1]松弛操作必定只会发生在最短路径前导节点松弛成功过的节点上，用一个队列记&gt;录松弛过的节点，可以避免了冗余计算。复杂度可以降低到O(kE)，k是个比较小的系数(并且在绝大多数的图中，k&lt;=2，然而在一些精&gt;心构造的图中可能会上升到很高)</p>
+</blockquote>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;cstring&gt;
+#include&lt;cstdlib&gt;
+#include&lt;cstdio&gt;
+#include&lt;cmath&gt;
+#include&lt;string&gt;
+#include&lt;algorithm&gt;
+#include&lt;vector&gt;
+#include&lt;queue&gt;
+#include&lt;map&gt;
+#include&lt;set&gt;
+
+using namespace std;
+#define MAXN 10010
+#define INF 0x3f3f3f3f
+struct Arc
+{
+    int to;
+    int weight;
+};
+
+vector &lt;Arc&gt; G[MAXN];
+queue&lt;int&gt;Q;
+int book[MAXN];
+int dis[MAXN],path[MAXN];
+int n;
+void SPFA(int s)
+{
+   int u;
+  for(int i = 0;i&lt;n;i++)
+   {
+       dis[i] = INF;
+      path[i] = s;
+        book[i] = 0;
+    }
+    dis[s] = 0;
+    book[s]++;
+    Q.push(s);
+    while(!Q.empty())
+    {
+        u = Q.front();Q.pop();book[u]--;
+        for(int i = 0;i&lt;G[u].size();i++)
+        {
+            int v = G[u][i].to;
+            if(dis[v]&gt;dis[u]+G[u][i].weight)
+            {
+                dis[v] = dis[u] + G[u][i].weight;
+                path[v] = u;
+                if(!book[v])
+                {
+                    Q.push(v);
+                    book[v]++;
+                } 
+            }
+        }
+    }
+}
+</code></pre>
+          
+        
+      </div>
+      <footer>
+        
+          <div class="alignright">
+            <a href="/2016/09/28/spfa/#more" class="more-link">Continue Reading<i class="fa fa-long-arrow-right fa-1"></i></a>
+          </div>
+        
+        <div class="clearfix"></div>
+      </footer>
+    </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  
+    <div class="post-content-index">
+  
+      
+        <header>
+          <div class="icon"></div>
+            
+    
       <h1 class="title transition"><a href="/2016/09/08/china/">中国剩余定理</a></h1>
     
   
@@ -239,6 +354,10 @@ body{ -webkit-animation: bugfix infinite 1s; }
 <div class="widget recent-post">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2016/09/28/spfa/">spfa</a>
+      </li>
     
       <li>
         <a href="/2016/09/08/china/">中国剩余定理</a>
