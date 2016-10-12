@@ -118,6 +118,71 @@ body{ -webkit-animation: bugfix infinite 1s; }
           <div class="icon"></div>
             
     
+      <h1 class="title transition"><a href="/2016/10/12/rprime/">反素数“</a></h1>
+    
+  
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2016-10-12T06:24:18.000Z">2016-10-12</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">Dizzz</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+          </ul>
+        </header>
+      
+      <div class="entry">
+        
+          
+            <p>参考了<a href="http://blog.csdn.net/ACdreamers/article/details/25049767" target="_blank" rel="external">Acmdreamers的博客</a></p>
+<ul>
+<li>反素数的定义：<br>对于任何正整数n，其约数个数记为f(n)。<br>如果某个正整数n满足：对任意的正整数i(0&lt;i&lt;n),都有f(i)&lt;f(n),那么称n为反素数。<br>为了保证有n个约数的这个数尽量小，所有质因子必然是从2开始的连续若干个质数，并且因子的个数递减。</li>
+<li>应用</li>
+</ul>
+<ol>
+<li>给定一个数n，求一个最小的正整数x，使得的x约数个数为n</li>
+<li>求出1~n中约数个数最多的这个数</li>
+</ol>
+<p>主要使用dfs来计算x<br>下面是一道例题<a href="http://codeforces.com/problemset/problem/27/E" target="_blank" rel="external">cf27E</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int p[16] = &#123;2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53&#125;;</div><div class="line">unsigned long long n,ans;</div><div class="line">void dfs(int dep,unsigned long long temp,int num)</div><div class="line">&#123;</div><div class="line">	//cout&lt;&lt;dep&lt;&lt;&apos; &apos;&lt;&lt;temp&lt;&lt;&apos; &apos;&lt;&lt;num&lt;&lt;endl;</div><div class="line">	if(num &gt; n) return;</div><div class="line">	if(num == n)</div><div class="line">	&#123;</div><div class="line">		if(temp &lt; ans)</div><div class="line">			ans = temp;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	for(int i = 1;i&lt;=63;i++)</div><div class="line">	&#123;</div><div class="line">		if(temp*p[dep]&gt;ans)</div><div class="line">			break;</div><div class="line">		temp*= p[dep];</div><div class="line">		//cout&lt;&lt;temp&lt;&lt;endl;</div><div class="line">		dfs(dep+1,temp,num*(i+1));</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	cin&gt;&gt;n;</div><div class="line">	ans = 0x3f3f3f3f3f3f3f3f;</div><div class="line">	dfs(0,1,1);</div><div class="line">	cout&lt;&lt;ans&lt;&lt;endl;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      </div>
+      <footer>
+        
+          <div class="alignright">
+            <a href="/2016/10/12/rprime/#more" class="more-link">Continue Reading<i class="fa fa-long-arrow-right fa-1"></i></a>
+          </div>
+        
+        <div class="clearfix"></div>
+      </footer>
+    </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  
+    <div class="post-content-index">
+  
+      
+        <header>
+          <div class="icon"></div>
+            
+    
       <h1 class="title transition"><a href="/2016/10/12/poj2828/">poj2828</a></h1>
     
   
@@ -410,6 +475,10 @@ void SPFA(int s)
 <div class="widget recent-post">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2016/10/12/rprime/">反素数“</a>
+      </li>
     
       <li>
         <a href="/2016/10/12/poj2828/">poj2828</a>
