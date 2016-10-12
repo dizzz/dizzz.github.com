@@ -118,6 +118,62 @@ body{ -webkit-animation: bugfix infinite 1s; }
           <div class="icon"></div>
             
     
+      <h1 class="title transition"><a href="/2016/10/12/poj2828/">poj2828</a></h1>
+    
+  
+          <ul>
+            <li>
+              <span class="heading-span">Posted on: </span>
+              <time datetime="2016-10-12T00:36:49.000Z">2016-10-12</time>
+            </li>
+            
+              <li>
+                <span class="heading-span">By: </span>
+
+                
+                  <a href="/">Dizzz</a>
+                
+
+              </li>
+            
+            <li>
+              <span class="heading-span">With: </span>
+              
+          </ul>
+        </header>
+      
+      <div class="entry">
+        
+          
+            <p>一道线段树的好题..<a href="http://poj.org/problem?id=2828" target="_blank" rel="external">poj2828</a><br>刚开始学线段树，感觉进度有点落后了…<br>每个人都有一个value值和pos值，进入队伍时会把pos上的人挤到后面去。<br>考虑逆序建立线段树，因为这样插入之后可以保证位置不会再被改变。<br>插入时，如果左子节点已经站不下了，就站到右子节点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;cstring&gt;</div><div class="line">#include&lt;cstdlib&gt;</div><div class="line">#include&lt;cstdio&gt;</div><div class="line">#include&lt;cmath&gt;</div><div class="line">#include&lt;string&gt;</div><div class="line">#include&lt;algorithm&gt;</div><div class="line">#include&lt;vector&gt;</div><div class="line">using namespace std;</div><div class="line">#define MAXN  200010</div><div class="line">#define lson rt&lt;&lt;1</div><div class="line">#define rson rt&lt;&lt;1 | 1 </div><div class="line">#define mid int m = (l + r) &gt;&gt; 1</div><div class="line">int x[MAXN&lt;&lt;2];</div><div class="line">int map[MAXN&lt;&lt;2],n;</div><div class="line">int re[MAXN][2];</div><div class="line">void build(int l,int r,int rt)</div><div class="line">&#123;</div><div class="line">	if(l == r)</div><div class="line">	&#123;</div><div class="line">		x[rt]  = 1;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	int m = (l + r) &gt;&gt; 1;</div><div class="line">	build(l,m,lson);</div><div class="line">	build(m+1,r,rson);</div><div class="line">	x[rt] = x[lson] + x[rson];</div><div class="line">&#125;</div><div class="line">void update(int l,int r,int rt,int val,int pos)</div><div class="line">&#123;</div><div class="line">	//cout&lt;&lt;l&lt;&lt;&apos; &apos;&lt;&lt;r&lt;&lt;&apos; &apos;&lt;&lt;rt&lt;&lt;&apos; &apos;&lt;&lt;val&lt;&lt;&apos; &apos;&lt;&lt;pos&lt;&lt;endl;    </div><div class="line">	if(l == r)</div><div class="line">	&#123;</div><div class="line">		map[rt] = val;</div><div class="line">		x[rt] --;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	mid;</div><div class="line">	if(x[lson] &gt; pos) update(l,m,lson,val,pos);</div><div class="line">	else update(m+1,r,rson,val,pos-x[lson]);</div><div class="line">	x[rt] = x[lson] + x[rson];</div><div class="line">&#125;</div><div class="line">void print_ans(int l,int r,int rt)</div><div class="line">&#123;</div><div class="line">	if(l == r)</div><div class="line">	&#123;</div><div class="line">		if(l == n -1)</div><div class="line">			cout&lt;&lt;map[rt]&lt;&lt;endl;</div><div class="line">		else</div><div class="line">			cout&lt;&lt;map[rt]&lt;&lt;&apos; &apos;;</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	mid;</div><div class="line">	print_ans(l,m,lson);</div><div class="line">	print_ans(m+1,r,rson);</div><div class="line">&#125;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	ios::sync_with_stdio(false);</div><div class="line">	while(cin&gt;&gt;n)&#123;</div><div class="line">		build(0,n-1,1);</div><div class="line">		for(int i  = 0;i&lt;n;i++)&#123;</div><div class="line">			cin&gt;&gt;re[i][0]&gt;&gt;re[i][1];</div><div class="line">		&#125;</div><div class="line">		for(int i = n - 1;i&gt;-1;i--)</div><div class="line">			update(0,n-1,1,re[i][1],re[i][0]);</div><div class="line">		print_ans(0,n-1,1);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
+        
+      </div>
+      <footer>
+        
+          <div class="alignright">
+            <a href="/2016/10/12/poj2828/#more" class="more-link">Continue Reading<i class="fa fa-long-arrow-right fa-1"></i></a>
+          </div>
+        
+        <div class="clearfix"></div>
+      </footer>
+    </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  
+    <div class="post-content-index">
+  
+      
+        <header>
+          <div class="icon"></div>
+            
+    
       <h1 class="title transition"><a href="/2016/09/28/spfa/">spfa</a></h1>
     
   
@@ -354,6 +410,10 @@ void SPFA(int s)
 <div class="widget recent-post">
   <h3 class="title">最新文章</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2016/10/12/poj2828/">poj2828</a>
+      </li>
     
       <li>
         <a href="/2016/09/28/spfa/">spfa</a>
